@@ -1,0 +1,112 @@
+Para usar o **Poetry** no seu projeto Python, você vai precisar seguir algumas etapas para configurá-lo corretamente, gerenciar dependências e criar um ambiente virtual. Aqui está um passo a passo para integrar o Poetry ao seu projeto:
+
+---
+
+### **1. Instalar o Poetry**
+Se você ainda não instalou o Poetry, siga esses comandos no terminal:
+
+- No Lubuntu (ou qualquer sistema Linux):
+  ```bash
+  curl -sSL https://install.python-poetry.org | python3 -
+  ```
+
+Após a instalação, certifique-se de que o Poetry está no seu PATH. Você pode verificar com:
+```bash
+poetry --version
+```
+
+---
+
+### **2. Inicializar um novo projeto com Poetry**
+Se você está começando um novo projeto Python, basta navegar até o diretório onde você quer criar o projeto e executar o seguinte comando:
+```bash
+poetry new nome-do-projeto
+```
+Isso criará um novo diretório chamado `nome-do-projeto` com a estrutura básica de um projeto Python, incluindo um arquivo `pyproject.toml` (onde as dependências e configurações do projeto são armazenadas).
+
+Se já tiver um projeto existente, você pode inicializar o Poetry no diretório do seu projeto com:
+```bash
+cd seu-projeto
+poetry init
+```
+Esse comando irá criar o arquivo `pyproject.toml` e permitir que você configure suas dependências interativamente.
+
+---
+
+### **3. Gerenciar dependências**
+Com o Poetry, você pode adicionar ou remover dependências facilmente.
+
+#### **Adicionar uma dependência**:
+Por exemplo, para adicionar o **`requests`**:
+```bash
+poetry add requests
+```
+
+#### **Adicionar uma dependência de desenvolvimento** (ex: para testes):
+```bash
+poetry add --dev pytest
+```
+
+#### **Remover uma dependência**:
+```bash
+poetry remove requests
+```
+
+---
+
+### **4. Criar e ativar o ambiente virtual**
+O Poetry cria e gerencia um ambiente virtual automaticamente para o seu projeto. Para instalar as dependências no ambiente virtual e ativá-lo, basta rodar:
+```bash
+poetry install
+```
+
+Isso irá:
+- Criar o ambiente virtual (se não houver um).
+- Instalar as dependências listadas no `pyproject.toml`.
+  
+Para ativar o ambiente virtual:
+```bash
+poetry shell
+```
+
+Agora, qualquer comando Python que você executar será dentro desse ambiente virtual.
+
+---
+
+### **5. Usar o Poetry para executar scripts**
+Com o ambiente configurado, você pode rodar scripts Python dentro do ambiente do Poetry. Por exemplo:
+```bash
+poetry run python seu_script.py
+```
+
+---
+
+### **6. Gerenciar as dependências do projeto**
+As dependências ficam registradas no arquivo `pyproject.toml` e no arquivo `poetry.lock`. O arquivo `poetry.lock` garante que as versões exatas das dependências sejam utilizadas em diferentes máquinas.
+
+- **Atualizar dependências**:
+  ```bash
+  poetry update
+  ```
+
+---
+
+### **7. Configurar o projeto para publicá-lo (opcional)**
+Se você quiser publicar seu projeto no PyPI (Python Package Index), você precisa configurar as informações no arquivo `pyproject.toml`, como nome, versão, descrição, etc.
+
+Para publicar:
+```bash
+poetry publish --build
+```
+
+---
+
+### **Resumo**
+O Poetry facilita muito o gerenciamento de dependências e ambientes virtuais em projetos Python. Aqui está um resumo das principais operações:
+1. **Instalar dependências**: `poetry add <package>`
+2. **Gerenciar ambiente virtual**: `poetry install` e `poetry shell`
+3. **Executar scripts**: `poetry run python <script.py>`
+4. **Atualizar dependências**: `poetry update`
+5. **Publicar projeto**: `poetry publish`
+
+Se precisar de mais ajuda ou tiver dúvidas específicas durante a configuração, é só avisar! 😊
