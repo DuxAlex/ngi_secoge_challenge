@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: example
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  app:
+    build: .
+    restart: always
+    environment:
+      DATABASE_URL: postgres://postgres:example@db:5432/mydatabase
+    depends_on:
+      - db
+
+# services:
+#   app:
+#     build: .
+#     volumes:
+#       - .:/app  # Mapeia o diretório local para o contêiner
+#     ports:
+#       - "8000:8000"
+#     command: poetry run python app.py  # Comando para rodar seu projeto
+
+# A linha build: . no serviço app indica que o Docker Compose deve usar o Dockerfile 
+# presente no diretório atual (.) para construir a imagem da sua aplicação.
+# A variável de ambiente DATABASE_URL foi definida para que a aplicação saiba onde está o banco de dados.
+# O depends_on garante que o serviço db (PostgreSQL) seja iniciado antes do serviço app.
