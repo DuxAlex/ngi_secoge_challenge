@@ -1,0 +1,109 @@
+###SRAG 2021 a 2024 - Banco de Dados de Síndrome Respiratória Aguda Grave - incluindo dados da COVID-19
+	O Ministério da Saúde (MS), por meio da Secretaria de Vigilância em Saúde (SVS), desenvolve a vigilância da Síndrome Respiratória Aguda Grave (SRAG) no Brasil, desde a pandemia de Influenza A(H1N1)pdm09. A partir disso, a vigilância de SRAG foi implantada na rede de vigilância de Influenza e outros vírus respiratórios, que anteriormente atuava exclusivamente com a vigilância sentinela de Síndrome Gripal (SG).
+
+	Em 2020, a vigilância da COVID-19, a infecção humana causada pelo novo Coronavírus, que vem causando uma pandemia, foi incorporada na rede de vigilância da Influenza e outros vírus respiratórios.
+
+	Esta página tem como finalidade disponibilizar o legado dos bancos de dados (BD) epidemiológicos de SRAG, da rede de vigilância da Influenza e outros vírus respiratórios, desde o início da sua implantação (2009) até os dias atuais (2024), com a incorporação da vigilância da covid-19. Atualmente, o sistema oficial para o registro dos casos e óbitos por SRAG é o Sistema de Informação da Vigilância Epidemiológica da Gripe (SIVEP-Gripe).
+
+	O MS publicou o Guia de Vigilância Epidemiológica Emergência de Saúde Pública de Importância Nacional pela Doença pelo Coronavírus 2019 aonde estão disponíveis informações sobre definições de casos, critérios de confirmação e encerramento dos casos, dentre outros.
+
+	Ressaltamos que os dados da vigilância de SRAG no Brasil disponibilizados nesta página, estão sujeitos a alterações decorrentes da investigação, ou mesmo correções de erros de digitação, pelas equipes de vigilância epidemiológica que desenvolvem o serviço nas três esferas de gestão.
+
+	Esclarece-se que as bases de dados de SRAG disponibilizadas neste portal passam por tratamento que envolve a anonimização, em cumprimento a Lei 13.709/2018.
+
+	Para mais informações, acessar:
+
+	Gripe/Influenza - https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/g/gripe-influenza
+
+	COVID-19 - https://www.gov.br/saude/pt-br/coronavirus
+
+	Guia Nacional de Vigilância da COVID-19 - https://www.gov.br/saude/pt-br/coronavirus/publicacoes-tecnicas/guias-e-planos/guia-de-vigilancia-epidemiologica-covid-19/view
+
+	#Informações Adicionais
+		Campo	Valor
+		Autor	Datasus
+		Última Atualização	23 de janeiro de 2025, 18:00 (UTC-03:00)
+		Criado	11 de janeiro de 2022, 15:30 (UTC-03:00)
+		Cobertura Geográfica	Nacional
+		Cobertura Temporal	A partir da Semana Epidemiológica 01 de cada ano.
+		Contato	dadosabertos@saude.gov.br
+		Granularidade Geográfica	Município
+		Granularidade temporal	Dia
+		Periodicidade de atualização	semanal
+		Referências	Classificação Brasileira de Ocupações (MTE), Tabela de Código de Municípios (IBGE), Cadastro Nacional de Estabelecimentos de Saúde (CNES).
+		Área Responsável	CGIAE/DAENT/SVSA
+
+		##Dados e recursos
+			Ficha de Notificação
+
+			Ficha de Notificação
+			URL: https://opendatasus.saude.gov.br/dataset/39a4995f-4a6e-440f-8c8f-b00c81fae0d0/resource/9f0edb83-f8c2-4b53-99c1-099425ab634c/download/ficha_srag_hospitalizado_19.09.2022.pdf
+
+			Dataset description:
+			O Ministério da Saúde (MS), por meio da Secretaria de Vigilância em Saúde (SVS), desenvolve a vigilância da Síndrome Respiratória Aguda Grave (SRAG) no Brasil, desde a pandemia de...
+			Fonte: SRAG 2021 a 2024 - Banco de Dados de Síndrome Respiratória Aguda Grave - incluindo dados da COVID-19
+
+			#Informações Adicionais
+				Campo	Valor
+				Dados atualizados pela última vez	25 de janeiro de 2023
+				Metadados atualizados pela última vez	29 de fevereiro de 2024
+				Criado	11 de janeiro de 2022
+				Formato	PDF
+				Licença	Creative Commons Atribuição
+				Datastore active	False
+				Has views	False
+				Id	9f0edb83-f8c2-4b53-99c1-099425ab634c
+				Mimetype	application/pdf
+				Package id	39a4995f-4a6e-440f-8c8f-b00c81fae0d0
+				Position	0
+				Size	691,3 KiB
+				State	active
+				Url type	upload
+
+
+		##Dicionário de Dados
+
+			Dicionário de Dados
+			URL: https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SRAG/pdfs/Dicionario_de_Dados_SRAG_Hospitalizado_19.09.2022.pdf
+
+			Dataset description:
+			O Ministério da Saúde (MS), por meio da Secretaria de Vigilância em Saúde (SVS), desenvolve a vigilância da Síndrome Respiratória Aguda Grave (SRAG) no Brasil, desde a pandemia de...
+			Fonte: SRAG 2021 a 2024 - Banco de Dados de Síndrome Respiratória Aguda Grave - incluindo dados da COVID-19
+
+			#Informações Adicionais
+				Campo	Valor
+				Dados atualizados pela última vez	25 de janeiro de 2023
+				Metadados atualizados pela última vez	29 de fevereiro de 2024
+				Criado	11 de janeiro de 2022
+				Formato	PDF
+				Licença	Creative Commons Atribuição
+				Datastore active	False
+				Has views	False
+				Id	3135ac9c-2019-4989-a893-2ed50ebd8e68
+				Mimetype	application/pdf
+				Package id	39a4995f-4a6e-440f-8c8f-b00c81fae0d0
+				Position	1
+				Size	979,1 KiB
+				State	active
+			
+		##SRAG 2024 - 20/01
+			URL: https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SRAG/2024/INFLUD24-20-01-2025.csv
+
+			Dataset description:
+			O Ministério da Saúde (MS), por meio da Secretaria de Vigilância em Saúde (SVS), desenvolve a vigilância da Síndrome Respiratória Aguda Grave (SRAG) no Brasil, desde a pandemia de...
+			Fonte: SRAG 2021 a 2024 - Banco de Dados de Síndrome Respiratória Aguda Grave - incluindo dados da COVID-19
+			
+			#Informações Adicionais
+				Campo	Valor
+				Dados atualizados pela última vez	23 de janeiro de 2025
+				Metadados atualizados pela última vez	23 de janeiro de 2025
+				Criado	27 de março de 2024
+				Formato	CSV
+				Licença	Creative Commons Atribuição
+				Datastore active	False
+				Has views	False
+				Id	8cb52f73-0184-41d5-8a8f-87d8f415652c
+				Mimetype	text/csv
+				Package id	39a4995f-4a6e-440f-8c8f-b00c81fae0d0
+				Position	5
+				State	active

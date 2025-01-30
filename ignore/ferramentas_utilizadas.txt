@@ -1,6 +1,6 @@
-1. extração: pandas ou request.
+1. extração: pandas e request.
 2. orquestração de processos: Airflow ou Airbyte.
-3. banco de dados: PostgreSQL(docker) ou sqlite.
+3. banco de dados: PostgreSQL(docker)
 4. Linguagem: python e SQL.
-5. Outra bibliotecas:Psycopg2, from sqlalchemy import create_engine, import requests from bs4 import BeautifulSoup.
+5. Outra bibliotecas:Psycopg2, import requests 
 6. setup de ambiente: docker e Poetry.

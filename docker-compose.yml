@@ -1,38 +1,57 @@
-version: '3.9'
-
+version: "2.1"
 services:
-
-  db:
-    image: postgres
-    restart: always
-    shm_size: 128mb
+  postgres:
+    image: postgres:12
     environment:
-      POSTGRES_PASSWORD: example
-
-  adminer:
-    image: adminer
-    restart: always
+      - POSTGRES_USER=ngisecoge
+      - POSTGRES_PASSWORD=ngisecoge
+      - POSTGRES_DB=srag2024
     ports:
-      - 8080:8080
+      - "5434:5432"
 
-  app:
-    build: .
-    restart: always
-    environment:
-      DATABASE_URL: postgres://postgres:example@db:5432/mydatabase
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: ./scripts/airflow-entrypoint.sh
+    command: scheduler
+    restart: on-failure
     depends_on:
-      - db
+      - postgres
+    env_file:
+      - .env
+    ports:
+      - "8794:8793"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./airflow-logs:/opt/airflow/logs
+      - ./scripts:/opt/airflow/scripts
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+      interval: 30s
+      timeout: 30s
+      retries: 2
 
-# services:
-#   app:
-#     build: .
-#     volumes:
-#       - .:/app  # Mapeia o diretório local para o contêiner
-#     ports:
-#       - "8000:8000"
-#     command: poetry run python app.py  # Comando para rodar seu projeto
-
-# A linha build: . no serviço app indica que o Docker Compose deve usar o Dockerfile 
-# presente no diretório atual (.) para construir a imagem da sua aplicação.
-# A variável de ambiente DATABASE_URL foi definida para que a aplicação saiba onde está o banco de dados.
-# O depends_on garante que o serviço db (PostgreSQL) seja iniciado antes do serviço app.
+  webserver:
+    hostname: webserver
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: ./scripts/airflow-entrypoint.sh
+    command: webserver
+    restart: always
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./airflow-logs:/opt/airflow/logs
+      - ./scripts:/opt/airflow/scripts
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+      interval: 30s
+      timeout: 30s
+      retries: 2

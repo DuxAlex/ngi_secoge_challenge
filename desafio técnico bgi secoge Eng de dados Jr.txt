@@ -1,0 +1,110 @@
+Objetivo
+O objetivo geral desse desafio é a construção de um pipeline de dados utilizando Python e SQL. Mais especificamente, você vai:
+
+Construir um pipeline para extrair, transformar, e carregar dados à sua escolha, usando Python e/ou SQL.
+
+Elaborar duas consultas sobre esses dados, usando SQL.
+
+Escrever um breve relatório sobre esses dados.
+
+
+Vamos entrar em detalhes sobre cada um desses passos:
+
+Passos
+1. Extração de dados usando Python
+Dados
+Escolha um conjunto de dados abertos ao público para utilizar nesse desafio.
+
+Recomendamos que você escolha dados que você ache interessantes ou que você conheça bem. Não precisa se limitar a dados de saúde!
+
+Você pode pegar os dados já prontos (em arquivos .csv, por exemplo), ou pode criá-los você mesmo (usando web scraping, por exemplo).
+
+
+Abaixo, seguem algumas sugestões de onde encontrar dados:
+
+Base dos dados
+
+Kaggle
+
+openDataSUS
+
+Redes sociais (Letterboxd, Reddit, etc)
+
+Extração
+Usando Python, extraia os dados que você escolheu. Por exemplo, se a sua fonte disponibiliza os dados em arquivos .csv, use Python para baixar esses arquivos.
+
+
+O seu código deve extrair os dados. Não esperamos, por exemplo, que você baixe ou crie os arquivos manualmente e use Python apenas para lê-los e carregá-los.
+
+
+Fique a vontade para usar bibliotecas Python fora da standard library (como requests), desde que essas bibliotecas sejam instaláveis usando pip. Isso vale também para o próximo passo. Você pode assumir que instalaremos essas bibliotecas antes de rodar seu código
+
+
+Você é fortemente encorajado a usar alguma ferramenta de gerenciamento de dependências para Python. Qualquer ferramenta ajuda aqui, desde simples arquivos requirements.txt e .python-version, até ferramentas como uv ou Poetry.
+
+2. Transformação e carregamento dos dados num banco SQL
+Transformação
+Realize qualquer transformação necessária nesses dados. Você pode fazer isso em Python, antes de carregar os dados (ou seja, um processo ETL), ou em SQL, depois de carregar os dados (ou seja, um processo ELT).
+
+
+Por exemplo, se a sua fonte disponibiliza os dados em diversos arquivos .csv, você usar Python para ler esses arquivos e transformá-los em um só dataframe, renomear e normalizar colunas, e criar uma coluna de chave primária a partir de um índice numérico.
+
+Carregamento
+Usando Python, carregue esses dados num banco SQL.
+
+Você pode usar qualquer banco SQL aqui, como Postgres ou SQLite, desde que este seja open source.
+
+Se você usar Postgres ou qualquer outro banco que rode a partir de um servidor local, você pode assumir que nós criaremos um servidor localhost antes de rodar seu código (só não se esqueça de especificar o nome da db, porta, e credenciais que você usou, mesmo que estas sejam as defaults).
+
+Você pode, mas não necessariamente precisa, rodar o banco (ou o seu projeto inteiro) a partir de um container Docker.
+
+Se você usar SQLite, seu código precisa criar o arquivo .db.
+
+3. Consultas SQL
+Escreva duas consultas ao banco de dados que você carregou. O objetivo geral é gerar dados que você considere interessantes, seja fazendo recortes, filtragem, ou agrupamento nos dados.
+
+
+Por exemplo, suponha que os seus dados mostram registros de vacinação contra COVID em Pernambuco, onde cada linha corresponde a uma aplicação de uma dose da vacina.
+
+Você pode filtrar os dados para mostrar apenas vacinas aplicadas em Recife entre 2021 e 2022.
+
+Você pode agrupar os dados por cidadão, de maneira que cada linha agora corresponda a um único cidadão, com uma nova coluna informando quais vacinas e doses o cidadão tomou.
+
+
+Note que você não necessariamente vai fazer uma análise em cima desses dados! Por exemplo, você não precisa nos dizer qual foi a vacina mais aplicada em 2021, ou quantos cidadãos tiveram cobertura vacinal completa em 2022. Seu objetivo aqui é apenas gerar os dados para que estes possam ser utilizados pelos analistas.
+
+4. Relatório
+Escreva um breve relatório nos contando o processo de elaboração desse desafio. Seu relatório precisa conter, no mínimo, as seguintes informações:
+
+Dados:
+
+Uma breve descrição dos dados que você escolheu.
+
+Link(s) para a(s) fonte(s) de dados
+
+Porque você escolheu esses dados: o que você acha interessante sobre eles?
+
+Extração e Transformação:
+
+Um apanhado geral sobre o seu projeto: como você extraiu esses dados? Qual banco de dados você utilizou?
+
+Consultas:
+
+Uma breve descrição do que fazem cada uma de suas consultas
+
+Porque você escolheu essas consultas: o que você acha que pode ser interessante sobre esses recortes?
+
+
+Fique a vontade, também, para trazer outras informações ou reflexões acerca do projeto. Por exemplo, houve alguma parte que foi particularmente difícil? Como você lidou com esse obstáculo? Há algo que você faria diferente?
+
+Avaliação
+Seu projeto vai ser avaliado segundo os seguintes critérios:
+
+O projeto obedece as instruções descritas nesse documento;
+
+O código do seu projeto roda sem erros e conforme descrito;
+
+O projeto demonstra que você entende os dados e as ferramentas que você utilizou, seja por meio de comentários/documentação no seu código ou pelo relatório.
+
+
+Encorajamos você a preferir qualidade ao invés de quantidade ou complexidade neste desafio! Nós preferimos um projeto de menor escopo, mas que demonstra claramente que você sabe o que está fazendo, do que um projeto gigante copiado e colado.

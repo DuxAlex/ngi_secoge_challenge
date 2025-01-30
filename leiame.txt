@@ -1,0 +1,121 @@
+instalar a versão mais atual do python
+site python
+
+ambiente virtual
+1. pip install virtualenv
+2. virtualenv venv
+
+No Linux:
+bash
+source .venv/bin/activate
+
+No Windows:
+bash
+Copiar
+Editar
+venv\Scripts\activate
+
+3. pip install -r requirements.txt
+
+4. airflow db init
+5. airflow webserver --port 8080
+6. airflow scheduler
+
+airflow users create \
+    --username engdados \
+    --firstname alex \
+    --lastname souza \
+    --role Admin \
+    --email alexkrypto.ti@gmail.com \
+    --password ngisecoge
+    
+export AIRFLOW_HOME=/airflow
+    
+    Reinicie o Airflow:
+
+Caso o Airflow já esteja rodando, reinicie o webserver e o scheduler para carregar as novas DAGs:
+
+Iniciar o webserver:
+
+bash
+Copiar
+Editar
+airflow webserver --port 8080
+Iniciar o scheduler:
+
+bash
+Copiar
+Editar
+airflow scheduler
+Verifique a interface web:
+
+Acesse a interface web do Airflow em http://localhost:8080 (ou o endereço configurado) para garantir que suas DAGs foram carregadas corretamente.
+
+
+
+
+
+
+pip freeze > requirements.txt
+
+poetry iniciar projeto e dependecies
+
+1. poetry new ngi_secoge
+	poetry env use python3.13
+	poetry env ifo
+2. cd ngi_secoge
+3. poetry add pandas requests 
+apache-airflow
+ 
+
+Para iniciar um projeto utilizando o Poetry e instalar as dependências `pandas`, `requests` e `apache-airflow`, siga os passos abaixo:
+
+### Passo 1: Criar um novo projeto com o Poetry
+1. Abra o terminal e navegue até o diretório onde deseja criar o projeto.
+2. Execute o comando abaixo para inicializar o projeto com o Poetry:
+   ```bash
+   poetry new nome-do-projeto
+   ```
+   Isso criará uma nova estrutura de projeto.
+
+### Passo 2: Navegar até o diretório do projeto
+Depois de criar o projeto, acesse o diretório gerado:
+```bash
+cd nome-do-projeto
+```
+
+### Passo 3: Instalar as dependências
+Para adicionar as dependências `pandas`, `requests` e `apache-airflow`, execute o seguinte comando:
+```bash
+poetry add pandas requests apache-airflow
+```
+
+### Passo 4: Verificar as dependências instaladas
+Depois de instalar as dependências, o Poetry atualizará o arquivo `pyproject.toml` com as bibliotecas instaladas. Você pode verificar as dependências no arquivo ou executar o comando:
+```bash
+poetry show
+```
+
+### Passo 5: Ativar o ambiente virtual
+O Poetry cria automaticamente um ambiente virtual para o seu projeto. Para ativá-lo, use o comando:
+```bash
+poetry shell
+```
+
+Agora, seu projeto está configurado com as dependências `pandas`, `requests` e `apache-airflow`! Você pode começar a desenvolver o seu código Python com essas bibliotecas já instaladas no ambiente virtual do Poetry.
+
+instalar o docker
+site passo a paso
+
+01-Introdução.md
+02-Extração.md
+03-Transformação.md
+04-Consultas.md
+05-Relatório.md
+
+etl
+Executar o docker-compose>sobe o airflow, postgres
+> airflow executa dags> dags exucta scripts em python baixa o csv, transforma e carregar no db postgress>
+>executar comando de consulta SQL
+
+
