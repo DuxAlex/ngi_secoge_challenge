@@ -1,57 +1,33 @@
-version: "2.1"
+version: "3.8"
+
 services:
   postgres:
     image: postgres:12
+    container_name: ngi_secoge_postgres
     environment:
-      - POSTGRES_USER=ngisecoge
-      - POSTGRES_PASSWORD=ngisecoge
-      - POSTGRES_DB=srag2024
+      POSTGRES_USER: ngisecoge
+      POSTGRES_PASSWORD: ngisecoge
+      POSTGRES_DB: ngisecoge
+    volumes:
+      - ./data:/docker-entrypoint-initdb.d  # Mapeia o diretório 'data' para o diretório de inicialização do PostgreSQL
+    command: bash -c "chown -R postgres:postgres /docker-entrypoint-initdb.d/ && chmod 644 /docker-entrypoint-initdb.d/transformado_INFLUD24-20-01-2025.csv && docker-entrypoint.sh postgres"
     ports:
-      - "5434:5432"
+      - "5432:5432"
+    networks:
+      - ngi_secoge_net
 
-  scheduler:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    entrypoint: ./scripts/airflow-entrypoint.sh
-    command: scheduler
-    restart: on-failure
+  airflow:
+    image: apache/airflow:2.5.0
+    container_name: ngi_secoge_airflow
+    environment:
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://ngisecoge:ngisecoge@postgres:5432/ngisecoge  # Corrigido para usar o banco correto
     depends_on:
       - postgres
-    env_file:
-      - .env
-    ports:
-      - "8794:8793"
-    volumes:
-      - ./dags:/opt/airflow/dags
-      - ./airflow-logs:/opt/airflow/logs
-      - ./scripts:/opt/airflow/scripts
-    healthcheck:
-      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
-      interval: 30s
-      timeout: 30s
-      retries: 2
-
-  webserver:
-    hostname: webserver
-    build:
-      context: .
-      dockerfile: Dockerfile
-    entrypoint: ./scripts/airflow-entrypoint.sh
-    command: webserver
-    restart: always
-    depends_on:
-      - postgres
-    env_file:
-      - .env
-    volumes:
-      - ./dags:/opt/airflow/dags
-      - ./airflow-logs:/opt/airflow/logs
-      - ./scripts:/opt/airflow/scripts
     ports:
       - "8080:8080"
-    healthcheck:
-      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
-      interval: 30s
-      timeout: 30s
-      retries: 2
+    networks:
+      - ngi_secoge_net
+
+networks:
+  ngi_secoge_net:
+    driver: bridge

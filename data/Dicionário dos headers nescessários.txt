@@ -1,0 +1,116 @@
+Dicionário de Dados
+SG_UF_NOT
+Tipo: Varchar2(2)
+Descrição: Onde está localizada a Unidade que realizou a notificação.
+Valores: Código da Unidade Federativa (UF).
+
+ID_MUNICIP / CO_MUN_NOT
+Tipo: Varchar2
+Descrição: Código IBGE do município onde está localizada a Unidade que realizou a notificação.
+Valores: Código do município (IBGE) 26 e PE.
+
+ESTRANG
+Tipo: Varchar(1)
+Descrição: Indica se o paciente é estrangeiro.
+Valores:
+
+1: Sim
+2: Não
+
+CS_SEXO
+Tipo: Varchar2(1)
+Descrição: Sexo do paciente.
+Valores:
+
+1: Masculino
+2: Feminino
+9: Ignorado
+
+DT_NASC
+Tipo: Date (DD/MM/AAAA)
+Descrição: Data de nascimento do paciente.
+
+NU_IDADE_N
+Tipo: Varchar2(3)
+Descrição: Idade do paciente.
+
+CS_GESTANT
+Tipo: Varchar2(1)
+Descrição: Status gestacional do paciente.
+Valores:
+
+1: 1º Trimestre
+2: 2º Trimestre
+3: 3º Trimestre
+4: Idade Gestacional Ignorada
+5: Não
+6: Não se aplica
+9: Ignorado
+
+CS_RACA
+Tipo: Varchar2(2)
+Descrição: Raça/Cor do paciente.
+Valores:
+
+1: Branca
+2: Preta
+3: Amarela
+4: Parda
+5: Indígena
+9: Ignorado
+
+FATOR_RISC
+Tipo: Varchar2(1)
+Descrição: Indica se o paciente apresenta algum fator de risco.
+Valores:
+
+1: Sim
+2: Não
+9: Ignorado
+
+VACINA_COV
+Tipo: Varchar(1)
+Descrição: Indica se o paciente recebeu a vacina contra COVID-19.
+Valores:
+
+1: Sim
+2: Não
+9: Ignorado
+
+CLASSI_FIN
+Tipo: Varchar2(1)
+Descrição: Classificação final do caso.
+Valores:
+
+1: SRAG por influenza
+2: SRAG por outro vírus respiratório
+3: SRAG por outro agente etiológico, qual:
+4: SRAG não especificado
+5: SRAG por COVID-19
+
+EVOLUCAO
+Tipo: Varchar2(1)
+Descrição: Evolução do caso.
+Valores:
+
+1: Cura
+2: Óbito
+3: Óbito por outras causas
+9: Ignorado
+
+Colunas do Dataset
+As colunas no dataset referem-se aos seguintes campos:
+
+SG_UF_NOT
+ID_MUNICIP
+CO_MUN_NOT
+ESTRANG
+CS_SEXO
+DT_NASC
+NU_IDADE_N
+CS_GESTANT
+CS_RACA
+FATOR_RISC
+VACINA_COV
+CLASSI_FIN
+EVOLUCAO
