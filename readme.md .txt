@@ -31,6 +31,8 @@ pip freeze > requirements.txt
 
 sudo docker compose down
 sudo docker compose up -d
+sudo docker rm -f $(sudo docker ps -aq)
+
 
 Para reiniciar o container do PostgreSQL:
 sudo docker restart ngi_secoge_postgres
@@ -40,7 +42,7 @@ sudo docker logs ngi_secoge_postgres
 
 entrar no container do postgres
 sudo docker exec -it ngi_secoge_postgres psql -U ngisecoge
-1. Listar Bancos de Dados
+1. Listar Bancos de Dadoss
 Para listar todos os bancos de dados no PostgreSQL, use o comando:
 
 sql
@@ -75,4 +77,3 @@ Para sair do terminal do PostgreSQL, use o comando:
 
 sql
 \q
-

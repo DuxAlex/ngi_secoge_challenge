@@ -10,7 +10,6 @@ services:
       POSTGRES_DB: ngisecoge
     volumes:
       - ./data:/docker-entrypoint-initdb.d  # Mapeia o diretório 'data' para o diretório de inicialização do PostgreSQL
-    command: bash -c "chown -R postgres:postgres /docker-entrypoint-initdb.d/ && chmod 644 /docker-entrypoint-initdb.d/transformado_INFLUD24-20-01-2025.csv && docker-entrypoint.sh postgres"
     ports:
       - "5432:5432"
     networks:
