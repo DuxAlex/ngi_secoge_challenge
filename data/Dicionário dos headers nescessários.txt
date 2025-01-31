@@ -4,10 +4,17 @@ Tipo: Varchar2(2)
 Descrição: Onde está localizada a Unidade que realizou a notificação.
 Valores: Código da Unidade Federativa (UF).
 
-ID_MUNICIP / CO_MUN_NOT
-Tipo: Varchar2
+ID_MUNICIP
+Tipo: Varchar2(7)
 Descrição: Código IBGE do município onde está localizada a Unidade que realizou a notificação.
-Valores: Código do município (IBGE) 26 e PE.
+Valores: Código do município (IBGE) 
+26 e PE
+
+CO_MUN_NOT
+Tipo: Varchar2(50)
+Descrição: Código IBGE do município onde está localizada a Unidade que realizou a notificação.
+Valores: Código do município (IBGE) 
+26 e PE
 
 ESTRANG
 Tipo: Varchar(1)

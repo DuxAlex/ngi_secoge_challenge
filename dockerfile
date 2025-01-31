@@ -15,7 +15,7 @@ RUN pip install --upgrade pip
 RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org boto3
 
 # Ajustar as permissões para os arquivos no diretório de inicialização
-RUN chown -R postgres:postgres /docker-entrypoint-initdb.d/
+#RUN chown -R postgres:postgres /docker-entrypoint-initdb.d/
 
 # Voltar para o usuário airflow
 USER ${AIRFLOW_UID}
