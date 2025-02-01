@@ -15,8 +15,6 @@ Este projeto foi criado como parte do desafio **NGI Secoge**. Ele envolve a cons
 - 🐘 **PostgreSQL (Docker)** – Banco de dados relacional utilizado no projeto.
 - ⚡ **SQL** – Para consultas e manipulação dos dados.
 
-## 📁DIRETÓRIOS
-
 ## 📂 Estrutura de Diretórios
 
 ```bash
@@ -54,6 +52,9 @@ Este projeto foi criado como parte do desafio **NGI Secoge**. Ele envolve a cons
 
 6 directories, 25 files
 ```
+🛠️ Observações:
+- Cada diretório contém uma descrição detalhada para facilitar a navegação e entendimento.
+- Utilize os scripts localizados na pasta db para realizar consultas e validações no banco de dados.
 
 ## 📥 Como Rodar o Projeto
 
