@@ -1,16 +1,3 @@
-ferramentas 
-1. extração: pandas e request.
-2. transformação: pandas.
-3. Carregar: 
-4. orquestração de processos: Airflow ou Airbyte.
-5. banco de dados: PostgreSQL(docker)
-6. Linguagem: python e SQL.
-7. Outra bibliotecas:Psycopg2
-8. setup de ambiente: docker
-
-
-instalar a versão mais atual do python
-site python
 
 ambiente virtual
 1. pip install virtualenv
@@ -40,12 +27,15 @@ ver log de erro do container
 sudo docker logs ngi_secoge_postgres
 
 entrar no container do Airflow
-docker exec -it ngi_secoge_airflow /bin/bash
+sudo docker exec -it ngi_secoge_airflow /bin/bash
+su - airflow
+
 
 Execute o comando abaixo para adicionar seu usuário ao grupo docker:
 bash
 sudo usermod -aG docker $USER
 
+chmod -R 777 .
 
 entrar no container do postgres
 sudo docker exec -it ngi_secoge_postgres psql -U ngisecoge

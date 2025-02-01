@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   postgres:
     image: postgres:12
@@ -17,7 +15,9 @@ services:
       - ngi_secoge_net
 
   airflow:
-    image: apache/airflow:latest-python3.8
+    build:
+      context: .  # Define o diretório atual para buscar o Dockerfile
+    #image: apache/airflow:latest-python3.8
     container_name: ngi_secoge_airflow
     # Conecta o Airflow ao banco de dados PostgreSQL com o 
     # usuário 'ngisecoge', senha 'ngisecoge' e o banco de dados 'ngisecoge' 
@@ -29,7 +29,8 @@ services:
     depends_on:
       - postgres
     command: >
-      bash -c "airflow db init &&
+      bash -c "sudo chmod -R 777 /opt/airflow &&
+              airflow db init &&
               airflow users create --username ngisecoge --password ngisecoge --firstname ngisecoge --lastname User --role Admin --email ngisecoge@ngisecoge.com &&
               airflow webserver &
               airflow scheduler"
@@ -38,13 +39,13 @@ services:
     networks:
       - ngi_secoge_net
     volumes:
-      - ./dags:/opt/airflow/dags  # Mapeia a pasta local de DAGs
-      - ./logs:/opt/airflow/logs  # Mapeia a pasta local de logs (útil para ver e depurar logs de execução)
-      - ./scripts:/opt/airflow//scripts
-      - ./data:/opt/airflow/data
-      - ./venv:/opt/airflow/venv
-      - ./plugins:/opt/airflow/plugins  # Mapeia a pasta local de plugins (útil para adicionar plugins personalizados)
-      - ./data:/docker-entrypoint-initdb.d/  # Mapeia a pasta de arquivos SQL
+      - ./dags:/opt/airflow/dags/  # Mapeia a pasta local de DAGs
+      - ./logs:/opt/airflow/logs/  # Mapeia a pasta local de logs (útil para ver e depurar logs de execução)
+      - ./scripts:/opt/airflow/scripts/
+      - ./data:/opt/airflow/data/
+      #- ./.venv:/opt/airflow/.venv/
+      - ./plugins:/opt/airflow/plugins/  # Mapeia a pasta local de plugins (útil para adicionar plugins personalizados)
+      #- ./data:/docker-entrypoint-initdb.d/  # Mapeia a pasta de arquivos SQL
 networks:
   ngi_secoge_net:
     driver: bridge

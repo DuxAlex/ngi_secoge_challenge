@@ -1,0 +1,2 @@
+Onde serão armazenados as informações sobre o banco de dados, sobre os dados e as tabelas.
+possui também o setup.sql que será usado pelo docker para construir a tabela.
