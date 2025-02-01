@@ -1,2 +1,6 @@
 data/INFLUD24-20-01-2025.csv
 data/transformado_INFLUD24-20-01-2025.csv
+.venv/
+dbdata/
+logs/
+plugins/

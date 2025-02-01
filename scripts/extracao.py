@@ -1,4 +1,3 @@
-#Funcionando
 import os
 import requests
 

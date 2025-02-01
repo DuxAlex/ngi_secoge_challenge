@@ -9,6 +9,7 @@ services:
       POSTGRES_PASSWORD: ngisecoge
       POSTGRES_DB: ngisecoge
     volumes:
+      - ./dbdata:/var/lib/postgresql/data
       - ./data:/docker-entrypoint-initdb.d  # Mapeia o diretório 'data' para o diretório de inicialização do PostgreSQL
     ports:
       - "5432:5432"
@@ -16,17 +17,34 @@ services:
       - ngi_secoge_net
 
   airflow:
-    image: apache/airflow:2.5.0
+    image: apache/airflow:latest-python3.8
     container_name: ngi_secoge_airflow
+    # Conecta o Airflow ao banco de dados PostgreSQL com o 
+    # usuário 'ngisecoge', senha 'ngisecoge' e o banco de dados 'ngisecoge' 
+    # no container 'postgres' na porta 5432
     environment:
-      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://ngisecoge:ngisecoge@postgres:5432/ngisecoge  # Corrigido para usar o banco correto
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://ngisecoge:ngisecoge@postgres:5432/ngisecoge
+      - AIRFLOW__CORE__LOAD_EXAMPLES=false   # Não carregar DAGs de exemplo
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor # ou LocalExecutor para execução local  
     depends_on:
       - postgres
+    command: >
+      bash -c "airflow db init &&
+              airflow users create --username ngisecoge --password ngisecoge --firstname ngisecoge --lastname User --role Admin --email ngisecoge@ngisecoge.com &&
+              airflow webserver &
+              airflow scheduler"
     ports:
       - "8080:8080"
     networks:
       - ngi_secoge_net
-
+    volumes:
+      - ./dags:/opt/airflow/dags  # Mapeia a pasta local de DAGs
+      - ./logs:/opt/airflow/logs  # Mapeia a pasta local de logs (útil para ver e depurar logs de execução)
+      - ./scripts:/opt/airflow//scripts
+      - ./data:/opt/airflow/data
+      - ./venv:/opt/airflow/venv
+      - ./plugins:/opt/airflow/plugins  # Mapeia a pasta local de plugins (útil para adicionar plugins personalizados)
+      - ./data:/docker-entrypoint-initdb.d/  # Mapeia a pasta de arquivos SQL
 networks:
   ngi_secoge_net:
     driver: bridge

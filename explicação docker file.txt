@@ -1,0 +1,122 @@
+Se você deseja que o **Dockerfile** também crie usuários e configure permissões, você pode adicionar essas instruções diretamente dentro dele, utilizando comandos **`RUN`**. 
+
+Aqui está um exemplo de como você pode modificar o Dockerfile para criar usuários e realizar configurações adicionais ao construir a imagem:
+
+### Exemplo de Dockerfile
+
+```Dockerfile
+# Usa a imagem base do Airflow com Python 3.8
+FROM apache/airflow:latest-python3.8
+
+# Instala dependências adicionais se necessário
+USER root
+RUN apt-get update && apt-get install -y \
+    sudo \
+    vim \
+    curl
+
+# Cria o usuário de acesso
+RUN useradd -m -s /bin/bash airflow_user && \
+    echo "airflow_user:password" | chpasswd && \
+    usermod -aG sudo airflow_user
+
+# Cria diretórios adicionais e copia arquivos para o container
+COPY ./scripts /scripts
+COPY ./dags /opt/airflow/dags
+COPY ./logs /opt/airflow/logs
+COPY ./plugins /opt/airflow/plugins
+COPY ./data /docker-entrypoint-initdb.d/
+
+# Define permissões adequadas para os diretórios copiados
+RUN chown -R airflow_user:airflow_user /opt/airflow/dags /opt/airflow/logs /opt/airflow/plugins /docker-entrypoint-initdb.d
+
+# Define o usuário que será usado para rodar o Airflow
+USER airflow_user
+
+# Comando de entrada do container (não é necessário se você já tiver isso no docker-compose)
+ENTRYPOINT ["./scripts/wait-for-it.sh", "postgres:5432", "-t", "30", "--", "airflow", "scheduler", "&", "airflow", "webserver"]
+```
+
+### Explicação dos comandos no Dockerfile:
+
+1. **`FROM apache/airflow:latest-python3.8`**:
+   - Usa a imagem oficial do Airflow como base. Você está escolhendo uma versão com Python 3.8.
+
+2. **`USER root`**:
+   - Usa o usuário `root` para instalar pacotes ou fazer mudanças no sistema do container. Isso é necessário para instalar dependências ou fazer outras modificações no sistema.
+
+3. **`RUN apt-get update && apt-get install -y sudo vim curl`**:
+   - Instala alguns pacotes adicionais como `sudo`, `vim` e `curl`. Você pode adicionar pacotes extras que seu Airflow precisar.
+   
+4. **`RUN useradd -m -s /bin/bash airflow_user && echo "airflow_user:password" | chpasswd && usermod -aG sudo airflow_user`**:
+   - Cria o usuário `airflow_user` com a senha `password` (você pode personalizar a senha).
+   - A opção `-m` cria um diretório home para o usuário, e a opção `-s /bin/bash` define o shell padrão como bash.
+   - Depois, adiciona o usuário `airflow_user` ao grupo `sudo`, permitindo que ele tenha permissões administrativas dentro do container (você pode ajustar isso conforme necessário).
+
+5. **`COPY ./scripts /scripts`**, **`COPY ./dags /opt/airflow/dags`**, **`COPY ./logs /opt/airflow/logs`**, etc.:
+   - Copia os arquivos de suas pastas locais para os locais correspondentes dentro do container. Esse comando é importante para garantir que seus DAGs, scripts e logs estejam dentro do container, conforme você precisa.
+
+6. **`RUN chown -R airflow_user:airflow_user /opt/airflow/dags /opt/airflow/logs /opt/airflow/plugins /docker-entrypoint-initdb.d`**:
+   - Define o usuário `airflow_user` como o proprietário dos diretórios copiados para dentro do container, garantindo que ele tenha as permissões corretas para manipular esses arquivos.
+
+7. **`USER airflow_user`**:
+   - Após configurar o usuário, o Docker irá rodar o container com o usuário `airflow_user`, garantindo que o Airflow execute com as permissões corretas.
+
+8. **`ENTRYPOINT`**:
+   - Define o comando de entrada do container, que começa o Airflow, aguardando o PostgreSQL antes de iniciar o `scheduler` e o `webserver`. Isso já pode estar configurado no `docker-compose.yml`, mas pode ser definido também no Dockerfile.
+
+### Alterações no `docker-compose.yml`:
+
+Com a criação do Dockerfile, você pode agora construir a imagem personalizada no seu `docker-compose.yml` como segue:
+
+```yaml
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:12
+    container_name: ngi_secoge_postgres
+    environment:
+      POSTGRES_USER: ngisecoge
+      POSTGRES_PASSWORD: ngisecoge
+      POSTGRES_DB: ngisecoge
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - ngi_secoge_net
+
+  airflow:
+    build:
+      context: .  # Usa o diretório atual para construir a imagem
+      dockerfile: Dockerfile  # Especifica o Dockerfile para ser usado
+    container_name: ngi_secoge_airflow
+    environment:
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://ngisecoge:ngisecoge@postgres:5432/ngisecoge
+      - AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      - AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+    depends_on:
+      - postgres
+    entrypoint: ["./scripts/wait-for-it.sh", "postgres:5432", "-t", "30", "--", "airflow", "scheduler", "&", "airflow", "webserver"]
+    ports:
+      - "8080:8080"
+    networks:
+      - ngi_secoge_net
+    volumes:
+      - ./scripts:/scripts
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+      - ./data:/docker-entrypoint-initdb.d/
+
+networks:
+  ngi_secoge_net:
+    driver: bridge
+```
+
+### O que mudou:
+- **`build`** foi adicionado no serviço do **airflow** para construir a imagem personalizada com o Dockerfile.
+- O `Dockerfile` agora configura o usuário `airflow_user` e realiza outras personalizações.
+
+Com essas alterações, você não precisará criar manualmente usuários e permissões, pois isso será feito automaticamente ao construir a imagem.
