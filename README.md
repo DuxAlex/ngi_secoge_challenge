@@ -17,44 +17,43 @@ Este projeto foi criado como parte do desafio **NGI Secoge**. Ele envolve a cons
 
 ## 📁DIRETÓRIOS
 
+## 📂 Estrutura de Diretórios
+
+```bash
 .
 ├── dags
-│   ├── descricao_diretorio_dags.txt
-│   ├── direto_etl_dados_influd2024.py
-│   └── etl_dados_influd2024.txt
+│   ├── descricao_diretorio_dags.txt               # Descrição sobre as DAGs utilizadas
+│   ├── direto_etl_dados_influd2024.py             # Script principal da DAG para o ETL
+│   └── etl_dados_influd2024.txt                   # Informações complementares sobre o ETL
 ├── data
-│   ├── descricao_diretorio_data.txt
-│   ├── Dicionario_de_Dados_SRAG_Hospitalizado_19.09.2022.pdf
-│   ├── Dicionário dos headers nescessários.txt
-│   ├── Info_adicionais.txt
-│   └── setup.sql
+│   ├── descricao_diretorio_data.txt               # Informações sobre os dados armazenados
+│   ├── Dicionario_de_Dados_SRAG_Hospitalizado...  # Dicionário de dados para referência
+│   ├── Dicionário dos headers nescessários.txt    # Mapeamento dos headers essenciais
+│   ├── Info_adicionais.txt                        # Informações adicionais sobre os dados
+│   └── setup.sql                                  # Script SQL para inicializar o banco
 ├── db
-│   ├── descricao_diretorio_data.txt
-│   ├── obitos_f_ou_m.py
-│   ├── obitos_f_ou_m.sql
-│   ├── obitos_menos_12_vacinad.sql
-│   ├── obitos_vacina.sql
-│   └── teste_conexao.py
-├── docker-compose.yml
-├── dockerfile
+│   ├── descricao_diretorio_data.txt               # Descrição sobre os arquivos de banco
+│   ├── obitos_f_ou_m.py                           # Script Python para análise de óbitos
+│   ├── obitos_f_ou_m.sql                          # Consulta SQL para análise de óbitos
+│   ├── obitos_menos_12_vacinad.sql                # Consulta SQL sobre vacinação de menores
+│   ├── obitos_vacina.sql                          # Consulta SQL sobre óbitos e vacinas
+│   └── teste_conexao.py                           # Script para testar conexão com o banco
+├── docker-compose.yml                             # Arquivo de configuração do Docker Compose
+├── dockerfile                                     # Dockerfile para construção da imagem
 ├── help
-│   ├── database.txt
-│   ├── desafio técnico bgi secoge Eng de dados Jr.pdf
-│   ├── desafio técnico bgi secoge Eng de dados Jr.txt
-│   ├── diagrama_projeto.png
-│   ├── docker-compose (1).txt
-│   ├── requirements.txt
-│   └── WhatsApp Image 2025-01-30 at 18.08.04.jpeg
-├── README.md
-├── readme.md .txt
-├── requirements.txt
+│   ├── desafio técnico bgi secoge Eng de dados... # Documento detalhando o desafio técnico
+│   ├── desafio técnico bgi secoge Eng de dados... # Versão em texto do desafio técnico
+│   └── diagrama_projeto.png                       # Diagrama visual do projeto
+├── README.md                                      # Arquivo README principal do projeto
+├── requirements.txt                               # Dependências do projeto
 └── scripts
-    ├── descricao_diretorio_scripts.txt
-    ├── extracao.py
-    ├── main.py
-    └── transformar_salvar.py
+    ├── descricao_diretorio_scripts.txt           # Informações sobre os scripts
+    ├── extracao.py                                # Script para extração de dados
+    ├── main.py                                    # Script principal do projeto
+    └── transformar_salvar.py                      # Script para transformar e salvar dados
 
-6 directories, 30 files
+6 directories, 25 files
+```
 
 ## 📥 Como Rodar o Projeto
 
