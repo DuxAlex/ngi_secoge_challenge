@@ -67,5 +67,6 @@ DT_NASC, NU_IDADE_N, CS_GESTANT, CS_RACA, FATOR_RISC, VACINA_COV, CLASSI_FIN, EV
 
 4. **Carregamento**:
    - Os dados transformados foram armazenados em tabelas otimizadas no PostgreSQL, prontas para consultas e geração de relatórios atraveś do `setup.sql` e `docker` no ponto de incialização presente docker compose `./data:/docker-entrypoint-initdb.d`.
+   -  O processo de etl da dag `etl_completa_influd2024.py` realiza todo o processo extração dos dados, limpeza e carregamento dos dados tratados diretamente para o banco de dados.
 
 ---
