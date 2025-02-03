@@ -25,12 +25,14 @@ services:
     environment:
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://ngisecoge:ngisecoge@postgres:5432/ngisecoge
       - AIRFLOW__CORE__LOAD_EXAMPLES=false   # Não carregar DAGs de exemplo
-      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor # ou LocalExecutor para execução local  
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor # ou LocalExecutor para execução local
+      #- _PIP_ADDITIONAL_REQUIREMENTS=pandas
+  
     depends_on:
       - postgres
     command: >
       bash -c "sudo chmod -R 777 /opt/airflow &&
-              airflow db init &&
+              airflow db migrate &&
               airflow users create --username ngisecoge --password ngisecoge --firstname ngisecoge --lastname User --role Admin --email ngisecoge@ngisecoge.com &&
               airflow webserver &
               airflow scheduler"
@@ -39,13 +41,12 @@ services:
     networks:
       - ngi_secoge_net
     volumes:
+      - ./requirements.txt:/opt/airflow/requirements.txt  # Mapeia o arquivo de requisitos
       - ./dags:/opt/airflow/dags/  # Mapeia a pasta local de DAGs
       - ./logs:/opt/airflow/logs/  # Mapeia a pasta local de logs (útil para ver e depurar logs de execução)
       - ./scripts:/opt/airflow/scripts/
       - ./data:/opt/airflow/data/
-      #- ./.venv:/opt/airflow/.venv/
-      - ./plugins:/opt/airflow/plugins/  # Mapeia a pasta local de plugins (útil para adicionar plugins personalizados)
-      #- ./data:/docker-entrypoint-initdb.d/  # Mapeia a pasta de arquivos SQL
+      - ./plugins:/opt/airflow/plugins/
 networks:
   ngi_secoge_net:
     driver: bridge

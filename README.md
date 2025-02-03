@@ -97,7 +97,10 @@ Se não estiver instalado, siga a [a documentação do python](https://www.pytho
 ## 5️⃣ **Crie o ambiente virtual**:
 
     ```bash
-    virtualenv venv
+    virtualenv .venv
+    ou
+    python3 -m venv .venv
+
     ```
 
 ## 6️⃣ **Ative o ambiente virtual**:
