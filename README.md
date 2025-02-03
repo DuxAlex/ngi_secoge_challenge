@@ -54,7 +54,9 @@ Este projeto foi criado como parte do desafio **NGI Secoge**. Ele envolve a cons
 ```
 🛠️ Observações:
 - Cada diretório contém uma descrição detalhada para facilitar a navegação e entendimento.
-- Utilize os scripts localizados na pasta db para realizar consultas e validações no banco de dados.
+- Utilize os scripts localizados na pasta `db` para realizar consultas e validações no banco de dados.
+
+![Escopo do processos realizados no projeto](help/diagrama_ETL_ngisecoge.png)
 
 ## 📥 Como Rodar o Projeto
 
