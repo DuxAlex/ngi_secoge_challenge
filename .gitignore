@@ -4,3 +4,4 @@ data/transformado_INFLUD24-20-01-2025.csv
 dbdata/
 logs/
 plugins/
+dags/__pycache__

@@ -22,7 +22,6 @@ Este projeto foi criado como parte do desafio **NGI Secoge**. Ele envolve a cons
 ├── dags
 │   ├── descricao_diretorio_dags.txt               # Descrição sobre as DAGs utilizadas
 │   ├── direto_etl_dados_influd2024.py             # Script principal da DAG para o ETL
-│   └── etl_dados_influd2024.txt                   # Informações complementares sobre o ETL
 ├── data
 │   ├── descricao_diretorio_data.txt               # Informações sobre os dados armazenados
 │   ├── Dicionario_de_Dados_SRAG_Hospitalizado...  # Dicionário de dados para referência
@@ -43,6 +42,7 @@ Este projeto foi criado como parte do desafio **NGI Secoge**. Ele envolve a cons
 │   ├── desafio técnico bgi secoge Eng de dados... # Versão em texto do desafio técnico
 │   └── diagrama_projeto.png                       # Diagrama visual do projeto
 ├── README.md                                      # Arquivo README principal do projeto
+├── RELATÓRIO.md                                   # Relatório do projeto
 ├── requirements.txt                               # Dependências do projeto
 └── scripts
     ├── descricao_diretorio_scripts.txt           # Informações sobre os scripts
@@ -50,7 +50,7 @@ Este projeto foi criado como parte do desafio **NGI Secoge**. Ele envolve a cons
     ├── main.py                                    # Script principal do projeto
     └── transformar_salvar.py                      # Script para transformar e salvar dados
 
-6 directories, 25 files
+6 directories, 26 files
 ```
 🛠️ Observações:
 - Cada diretório contém uma descrição detalhada para facilitar a navegação e entendimento.
@@ -123,15 +123,7 @@ Se não estiver instalado, siga a [a documentação do python](https://www.pytho
     pip install -r requirements.txt
     ```
 
-## 8️⃣ **Executando os Scripts:**
-
- Após instalar as dependências, execute o arquivo `main.py` para rodar os scripts de extração e transformação de dados.
-
-```
-python3 ./scripts/main.py
-```
-
-## 9️⃣ **Subindo o Docker Compose:**
+## 8️⃣ **Subindo o Docker Compose:**
 
 Depois de executar os scripts, agora é necessário subir os contêineres usando o Docker Compose. 
 
@@ -187,6 +179,7 @@ O arquivo `docker-compose.yml` define dois serviços principais: **PostgreSQL** 
     - `./scripts` para scripts.
     - `./data` para dados.
     - `./plugins` para plugins personalizados.
+    - `./requirements.txt:/opt/airflow/requirements.txt Mapeia o arquivo de requisitos`
   - A porta `8080` é mapeada para acessar o Airflow Web UI.
   - Está na rede `ngi_secoge_net`.
 
@@ -214,13 +207,9 @@ O `Dockerfile` personalizado do **Airflow** define as etapas para construir uma 
   
   - É configurado para que o usuário `airflow` possa executar o `sudo` sem a necessidade de fornecer uma senha, facilitando as execuções de comandos com permissões elevadas dentro do contêiner.
 
-- **Instalação do `pandas`**:
+- **Instalação de Dependências Adicionais **:
   
-  - O pacote `pandas` é instalado usando `pip`. Isso é necessário caso o Airflow precise manipular dados em DataFrames.
-
-- **Instalação de Dependências Adicionais (Opcional)**:
-  
-  - Se houver um arquivo `requirements.txt`, as dependências listadas nele serão instaladas.
+  - Instala as dependencias lista no arquivo `requirements.txt`.
 
 - **Configuração do Diretório de Trabalho**:
   
@@ -287,6 +276,9 @@ CSV HEADER;
 
 Este comando **COPY** importa os dados de um arquivo CSV (`transformado_INFLUD24-20-01-2025.csv`) para a tabela `dados_influd24`.
 
+##OBS:
+**Entretanto**, a parte de carregamento dos dados transformados será feita através da DAG no Airflow. O arquivo `setup.sql` apenas criará o escopo da tabela.
+
 - O arquivo CSV está localizado no diretório `/docker-entrypoint-initdb.d/`, que é onde o PostgreSQL busca os arquivos para importar quando o contêiner é iniciado.
 - O delimitador do arquivo CSV é `;`, indicando que os campos no arquivo são separados por ponto e vírgula.
 - A opção `CSV HEADER` indica que a primeira linha do arquivo contém os nomes das colunas, que serão ignoradas durante a importação.
@@ -306,7 +298,7 @@ Para facilitar a interação com o banco de dados e realizar consultas SQL, reco
 1. Instale o DBeaver [aqui](https://dbeaver.io/download/).
 2. Abra o DBeaver e crie uma nova conexão PostgreSQL.
 3. Preencha os detalhes da conexão com as seguintes configurações:
-   - **Host**: `localhost`
+   - **Host**: `localhost` OU `127.0.0.1`
    - **Porta**: `5432`
    - **Banco de Dados**: `ngisecoge`
    - **Usuário**: `ngisecoge`
