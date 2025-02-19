@@ -45,7 +45,7 @@ Este projeto foi criado como parte do desafio **NGI Secoge**. Ele envolve a cons
 ├── RELATÓRIO.md                                   # Relatório do projeto
 ├── requirements.txt                               # Dependências do projeto
 └── scripts
-    ├── descricao_diretorio_scripts.txt           # Informações sobre os scripts
+    ├── descricao_diretorio_scripts.txt            # Informações sobre os scripts
     ├── extracao.py                                # Script para extração de dados
     ├── main.py                                    # Script principal do projeto
     └── transformar_salvar.py                      # Script para transformar e salvar dados
